@@ -1,0 +1,21 @@
+name: Prompt Rubric Drift
+description: Generate deterministic prompt and rubric drift PR notes.
+inputs:
+  before:
+    description: Directory containing base prompt/rubric files
+    required: true
+  after:
+    description: Directory containing changed prompt/rubric files
+    required: true
+  output:
+    description: Markdown report path
+    required: false
+    default: prompt-rubric-drift.md
+runs:
+  using: composite
+  steps:
+    - run: python -m pip install prompt-rubric-drift
+      shell: bash
+    - run: prompt-rubric-drift compare "${{ inputs.before }}" "${{ inputs.after }}" --out "${{ inputs.output }}"
+      shell: bash
+

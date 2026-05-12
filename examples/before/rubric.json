@@ -1,0 +1,7 @@
+{
+  "criteria": [
+    {"name": "factuality", "weight": 0.7},
+    {"name": "evidence", "weight": 0.3}
+  ]
+}
+
