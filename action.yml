@@ -1,5 +1,9 @@
 name: Prompt Rubric Drift
 description: Generate deterministic prompt and rubric drift PR notes.
+author: AuraOne
+branding:
+  icon: file-text
+  color: purple
 inputs:
   before:
     description: Directory containing base prompt/rubric files
