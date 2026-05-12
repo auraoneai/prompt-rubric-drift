@@ -14,8 +14,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: python -m pip install prompt-rubric-drift
+    - run: python -m pip install "${{ github.action_path }}"
       shell: bash
     - run: prompt-rubric-drift compare "${{ inputs.before }}" "${{ inputs.after }}" --out "${{ inputs.output }}"
       shell: bash
-
