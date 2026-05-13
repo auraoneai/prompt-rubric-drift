@@ -7,6 +7,12 @@ missing examples, prompt-injection exposure, and judge contract drift.
 
 No model call is required.
 
+## Scope
+
+This is not a model judge, policy approval, compliance review, or guarantee that
+a prompt or rubric change is safe. It is a deterministic PR-review aid for
+surfacing likely drift that still needs human review.
+
 ## Quick start
 
 ```bash
