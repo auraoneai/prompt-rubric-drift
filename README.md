@@ -17,3 +17,19 @@ prompt-rubric-drift compare examples/before examples/after --out report.md
 The report is designed to be pasted as a PR comment or published by the bundled
 GitHub Action.
 
+## GitHub Action
+
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - uses: auraoneai/prompt-rubric-drift@v0.1.0
+    with:
+      before: prompts/base
+      after: prompts/head
+      output: prompt-rubric-drift.md
+      comment: "true"
+```
+
+When `comment` is enabled on a pull request event, the action writes the report
+to the job summary and creates or updates one deterministic PR comment. Grant
+`issues: write` or `pull-requests: write` permission in the workflow.

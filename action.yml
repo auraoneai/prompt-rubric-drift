@@ -15,10 +15,49 @@ inputs:
     description: Markdown report path
     required: false
     default: prompt-rubric-drift.md
+  comment:
+    description: "Post or update a pull request comment with the deterministic drift report."
+    required: false
+    default: "true"
 runs:
   using: composite
   steps:
     - run: python -m pip install "${{ github.action_path }}"
       shell: bash
-    - run: prompt-rubric-drift compare "${{ inputs.before }}" "${{ inputs.after }}" --out "${{ inputs.output }}"
+    - run: |
+        prompt-rubric-drift compare "${{ inputs.before }}" "${{ inputs.after }}" --out "${{ inputs.output }}"
+        {
+          echo "## Prompt Rubric Drift"
+          echo
+          cat "${{ inputs.output }}"
+        } >> "$GITHUB_STEP_SUMMARY"
       shell: bash
+    - uses: actions/github-script@v8
+      if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' }}
+      with:
+        script: |
+          const fs = require('fs');
+          const marker = '<!-- auraone:prompt-rubric-drift -->';
+          const report = fs.readFileSync('${{ inputs.output }}', 'utf8');
+          const body = `${marker}\n${report}`;
+          const comments = await github.paginate(github.rest.issues.listComments, {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          const existing = comments.find((comment) => comment.body && comment.body.includes(marker));
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+          }
