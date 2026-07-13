@@ -19,3 +19,11 @@ def test_cli_compare_generates_report(tmp_path):
     assert "Prompt And Rubric Drift Report" in text
     assert "Suggested Review Questions" in text
 
+
+def test_cli_compare_json_contract(tmp_path):
+    out = tmp_path / "report.json"
+    assert main(["compare", "examples/before", "examples/after", "--format", "json", "--out", str(out)]) == 0
+    payload = __import__("json").loads(out.read_text(encoding="utf-8"))
+    assert payload["ok"] is True
+    assert payload["finding_count"] == len(payload["findings"])
+    assert payload["finding_count"] > 0

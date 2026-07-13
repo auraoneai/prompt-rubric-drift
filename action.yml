@@ -1,22 +1,22 @@
-name: Prompt Rubric Drift
-description: Generate deterministic prompt and rubric drift PR notes.
+name: Prompt and Rubric Drift Review
+description: Compare prompt and rubric directories and publish deterministic drift findings for pull request review.
 author: AuraOne
 branding:
   icon: file-text
   color: purple
 inputs:
   before:
-    description: Directory containing base prompt/rubric files
+    description: Workspace directory containing the base prompt and rubric files.
     required: true
   after:
-    description: Directory containing changed prompt/rubric files
+    description: Workspace directory containing the changed prompt and rubric files.
     required: true
   output:
-    description: Markdown report path
+    description: Workspace path for the generated Markdown report.
     required: false
     default: prompt-rubric-drift.md
   comment:
-    description: "Post or update a pull request comment with the deterministic drift report."
+    description: "On pull_request events, create or update the marker-matched report comment through the GitHub API."
     required: false
     default: "true"
 runs:
