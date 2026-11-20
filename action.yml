@@ -1,5 +1,5 @@
 name: Prompt and Rubric Drift Review
-description: Compare prompt and rubric directories and publish deterministic drift findings for pull request review.
+description: LLM evaluation drift review: compare prompt and rubric directories and publish deterministic PR findings.
 author: AuraOne
 branding:
   icon: file-text

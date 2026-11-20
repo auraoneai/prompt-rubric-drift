@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prompt-rubric-drift"
 version = "0.1.7"
-description = "Detect deterministic prompt and rubric drift and produce pull request review reports."
+description = "LLM evaluation prompt and rubric drift review: detect deterministic drift and produce pull request review reports."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
@@ -25,7 +25,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/auraoneai/prompt-rubric-drift"
+Homepage = "https://auraone.ai/open/rubric-studio-open"
+Source = "https://github.com/auraoneai/prompt-rubric-drift"
 Documentation = "https://github.com/auraoneai/prompt-rubric-drift#readme"
 Repository = "https://github.com/auraoneai/prompt-rubric-drift.git"
 Issues = "https://github.com/auraoneai/prompt-rubric-drift/issues"
