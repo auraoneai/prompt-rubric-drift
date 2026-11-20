@@ -1,5 +1,16 @@
 # prompt-rubric-drift
 
+**LLM evaluation prompt and rubric drift review** for pull requests, offline and deterministic.
+
+> Part of [Rubric Studio](https://auraone.ai/open/rubric-studio-open). Use it alongside Rubric Studio to get a deterministic first-pass review of prompt and rubric file changes before merge.
+
+## Quick Start
+
+```bash
+python -m pip install prompt-rubric-drift==0.1.7
+prompt-rubric-drift compare examples/before examples/after --out drift-report.md
+```
+
 Compare prompt and rubric directories and produce deterministic pull request review notes.
 
 `prompt-rubric-drift` is for prompt owners, evaluation engineers, and reviewers who need a repeatable first pass over scoring-contract changes. Its differentiator is an offline, deterministic review of both prompt and rubric files, using local text, JSON, and regex heuristics to flag stricter or looser wording, prompt-injection exposure, missing examples, judge-contract terms, weight changes, and added or removed criteria without calling a model.
